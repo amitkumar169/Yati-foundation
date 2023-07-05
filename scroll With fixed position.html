@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.item{
+			position: fixed;
+			overflow: hidden;
+			height: 100px;
+			width:100px;
+			background-color: yellow;
+		}
+	</style>
+<script type="text/javascript">
+	const el=document.getElementById("me");
+
+	el.addEventListener('mousedown',mousedown);
+
+	function mousedown(e){
+
+		window.addEventListener('mousemove',mousemove);
+		window.addEventListener('mouseup',mouseup);
+
+		let preX =e.clientX;
+		let preY =e.clientY;
+
+		function mousemove(e){
+			let newX =preX - e.clientX;
+			let newY =preY - e.clientY;
+			
+			const rect =el.getBoundingClientRect();
+
+			el.style.left=rect.left -mewX +"px";
+			el.style.top=rect.top -mewY +"px";
+
+			preX =e.clientX;
+			preY = e.clientY;
+
+		}
+
+
+		function mouseup() {
+			window.removeEventListener('mousemove',mousemove);
+			window.removeEventListener('mouseup',mouseup);
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="item" id="me"></div>
+
+
+
+</body>
+</html>
